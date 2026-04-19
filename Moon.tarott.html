@@ -1,0 +1,223 @@
+<!DOCTYPE html>
+<html lang="bg">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Moon Tarott | Rosi Di</title>
+    <link href="https://googleapis.com" rel="stylesheet">
+    <style>
+        :root {
+            --gold: #d4af37;
+            --dark-purple: #1a0b2e;
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(212, 175, 55, 0.3);
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background: radial-gradient(circle at center, #2e1a47 0%, #0a0510 100%);
+            color: white;
+            font-family: 'Raleway', sans-serif;
+            line-height: 1.6;
+        }
+
+        header {
+            padding: 50px 20px;
+            text-align: center;
+            border-bottom: 1px solid var(--glass-border);
+            backdrop-filter: blur(10px);
+        }
+
+        h1 { 
+            font-family: 'Cinzel', serif; 
+            color: var(--gold); 
+            letter-spacing: 5px; 
+            margin: 0;
+            font-size: 2.5em;
+        }
+
+        .signature {
+            font-family: 'Great Vibes', cursive;
+            font-size: 2.2em;
+            color: #fff;
+            margin-top: 10px;
+            text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+        }
+
+        .container { max-width: 1000px; margin: auto; padding: 40px 20px; }
+
+        /* Секции тип "Карта" */
+        .glass-card {
+            background: var(--glass);
+            border: 1px solid var(--glass-border);
+            padding: 30px;
+            border-radius: 20px;
+            margin-bottom: 30px;
+            backdrop-filter: blur(5px);
+            transition: 0.3s ease;
+        }
+
+        .glass-card:hover {
+            border-color: var(--gold);
+            box-shadow: 0 0 20px rgba(212, 175, 55, 0.1);
+        }
+
+        h2 {
+            font-family: 'Cinzel', serif;
+            color: var(--gold);
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 10px;
+            margin-top: 0;
+        }
+
+        /* Услуги Грид */
+        .services-list {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 15px;
+            list-style: none;
+            padding: 0;
+        }
+
+        .service-item {
+            background: rgba(255,255,255,0.05);
+            padding: 10px;
+            border-radius: 10px;
+            border-left: 3px solid var(--gold);
+        }
+
+        /* Интерактивна карта */
+        .draw-section {
+            text-align: center;
+        }
+
+        .card-slot {
+            width: 180px;
+            height: 280px;
+            border: 2px dashed var(--gold);
+            margin: 25px auto;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: 0.4s;
+            background: rgba(0,0,0,0.3);
+        }
+
+        .card-slot:hover {
+            transform: rotateY(10deg) scale(1.05);
+            box-shadow: 0 0 30px var(--gold);
+        }
+
+        #card-result {
+            font-family: 'Cinzel', serif;
+            font-size: 1.5em;
+            color: var(--gold);
+            font-weight: bold;
+        }
+
+        button {
+            background: var(--gold);
+            border: none;
+            padding: 15px 40px;
+            border-radius: 50px;
+            color: #000;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        button:hover {
+            background: #fff;
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255,255,255,0.2);
+        }
+
+        .contact-info {
+            font-size: 1.2em;
+            letter-spacing: 1px;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            opacity: 0.5;
+            font-size: 0.8em;
+        }
+
+        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.5; } 100% { opacity: 1; } }
+    </style>
+</head>
+<body>
+
+<header>
+    <h1>🌔 MOON TAROTT 🌛</h1>
+    <div class="signature">Rosi Di</div>
+    <p>Таро • Нумерология • Ритуали</p>
+</header>
+
+<div class="container">
+    
+    <!-- За мен -->
+    <section class="glass-card">
+        <h2>За мен</h2>
+        <p>Аз съм <strong>Rosi Di</strong> с над 6 години опит в таро, нумерология и ритуали. Моята мисия е да ти помогна да откриеш любовта, да внеса яснота в ежедневието ти и да ти покажа правилната посока в живота.</p>
+    </section>
+
+    <!-- Услуги -->
+    <section class="glass-card">
+        <h2>Услуги</h2>
+        <div class="services-list">
+            <div class="service-item">✨ Любовни четения</div>
+            <div class="service-item">🕯️ Ритуали за партньор</div>
+            <div class="service-item">🌙 Сбъдване на желания</div>
+            <div class="service-item">🔢 Нумерология</div>
+        </div>
+    </section>
+
+    <!-- Тегли карта -->
+    <section class="glass-card draw-section">
+        <h2>Тегли карта за деня</h2>
+        <p>Концентрирай се и докосни тестето за послание</p>
+        <div class="card-slot" onclick="draw()">
+            <span id="card-result">?</span>
+        </div>
+        <button onclick="draw()">Тегли нова карта</button>
+    </section>
+
+    <!-- Контакти -->
+    <section class="glass-card" style="text-align: center;">
+        <h2>Контакти & Плащания</h2>
+        <div class="contact-info">
+            <p>📞 <strong>0892301474</strong></p>
+            <p style="font-size: 0.8em; color: var(--gold);">IBAN: BG42CECB979010F2769801</p>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    &copy; 2024 Moon Tarott by Rosi Di. Всички права запазени.
+</footer>
+
+<script>
+const cards = ["ЛЮБОВ", "КЪСМЕТ", "ПРОМЯНА", "УСПЕХ", "НОВО НАЧАЛО", "СИЛА", "МЪДРОСТ"];
+
+function draw(){
+    const resultElement = document.getElementById("card-result");
+    resultElement.style.opacity = 0;
+    
+    setTimeout(() => {
+        const randomCard = cards[Math.floor(Math.random()*cards.length)];
+        resultElement.innerText = randomCard;
+        resultElement.style.opacity = 1;
+    }, 200);
+}
+</script>
+
+</body>
+</html>
